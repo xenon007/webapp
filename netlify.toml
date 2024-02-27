@@ -1,0 +1,40 @@
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+
+[dev]
+command = "vite"
+
+[functions]
+directory = "./src/lambda/"
+
+[[plugins]]
+package = "netlify-plugin-is-website-vulnerable"
+
+[[plugins]]
+package = "netlify-plugin-inline-critical-css"
+
+[[plugins]]
+  # runs Cypress tests against the deployed URL
+  package = "netlify-plugin-cypress"
+
+[[plugins]]
+package = "netlify-plugin-image-optim"
+
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+  # optional, fails build when a category is below a threshold
+  [plugins.inputs.thresholds]
+    performance = 0.9
+    accessibility = 0.9
+    best-practices = 0.9
+    seo = 0.9
+
+  # optional, deploy the lighthouse report to a path under your site
+  [plugins.inputs]
+    output_path = "reports/lighthouse.html"
+
+[[plugins]]
+package = "netlify-plugin-hashfiles"
